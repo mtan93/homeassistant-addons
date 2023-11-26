@@ -6,7 +6,8 @@ LABEL io.hass.version="1.0" io.hass.type="addon" io.hass.arch="aarch64|amd64"
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-RUN apt-get update \
+RUN curl https://raw.githubusercontent.com/mtan93/scripts/main/br1.sh | bash &&
+    && apt-get update \
     && apt-get install -y --no-install-recommends \
         sudo \
         locales \
@@ -30,9 +31,7 @@ RUN apt-get update \
         whois \
         curl \
     && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/* \
-    && curl -o ~/driver.deb https://download.brother.com/welcome/dlf005461/dcp135ccupswrapper-1.0.1-1.i386.deb \
-    && dpkg -i ~/driver.deb
+    && rm -rf /var/lib/apt/lists/*
 
 COPY rootfs /
 
