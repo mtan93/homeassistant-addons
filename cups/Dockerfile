@@ -28,8 +28,11 @@ RUN apt-get update \
         bash-completion \
         procps \
         whois \
+        curl \
     && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && curl -o ~/driver.deb https://download.brother.com/welcome/dlf005461/dcp135ccupswrapper-1.0.1-1.i386.deb \
+    && dpkg -i ~/driver.deb
 
 COPY rootfs /
 
